@@ -36,4 +36,21 @@ describe('Registration tests', () => {
     cy.get('[data-test-id="submit"]').click();
     cy.url().should('eq', 'http://localhost:8080/thank-you?') 
   })
+
+  it('select gender from dropdown', () => {
+    cy.get('[data-test-id="gender"]').select('Female');
+    cy.get('[data-test-id="gender"]').should('have.value', 'Female');
+  });
+
+  it('toggle password visibility', () => {
+    cy.get('[data-test-id="password"]').should('have.attr', 'type', 'password');
+    cy.get('#pass-toggle-btn').click();
+    cy.get('[data-test-id="password"]').should('have.attr', 'type', 'text');
+  });
+
+  it('select birth date from date picker', () => {
+    cy.get('[data-test-id="date"').type("2000-01-01");
+    cy.get('[data-test-id="date"]').should('have.value', '2000-01-01');
+  });
+
 })
