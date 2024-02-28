@@ -44,15 +44,51 @@ const handleFormData = (e) => {
     if (!emailPattern.test(email)) {
         showError(emailInput, "Enter a valid email address");
     }
-    if (password === "") {
-        showError(passwordInput, "Enter your password");
+    function validatePassword(password) {
+        if (password === "") {
+            return "Въведете вашата парола.";
+        }
+        if (password.length < 8) {
+            return "Паролата трябва да е поне 8 символа дълга.";
+        }
+        if (!/[a-z]/.test(password) || !/[A-Z]/.test(password)) {
+            return "Паролата трябва да съдържа както големи, така и малки букви.";
+        }
+        if (!/\d/.test(password)) {
+            return "Паролата трябва да съдържа поне една цифра.";
+        }
+        if (!/[!@#$%^&*()-_+=]/.test(password)) {
+            return "Паролата трябва да съдържа поне един специален символ.";
+        }
+        
+        return "Паролата е валидна.";
+
     }
-    if (date === "") {
-        showError(dateInput, "Select your date of birth");
+
+    function validateForm() {
+        var password = document.getElementById("password").value;
+        var date = document.getElementById("dateOfBirth").value;
+        var gender = document.getElementById("gender").value;
+    
+        var passwordMessage = validatePassword(password);
+        if (passwordMessage !== "Паролата е валидна.") {
+            showError(document.getElementById("password"), passwordMessage);
+            return false;
+        }
+    
+        if (date === "") {
+            showError(document.getElementById("dateOfBirth"), "Изберете датата на раждане.");
+            return false;
+        }
+    
+        if (gender === "") {
+            showError(document.getElementById("gender"), "Изберете вашия пол.");
+            return false;
+        }
+    
+        return true;
     }
-    if (gender === "") {
-        showError(genderInput, "Select your gender");
-    }
+    
 
     // Checking for any remaining errors before form submission
     const errorInputs = document.querySelectorAll(".form-group .error");
