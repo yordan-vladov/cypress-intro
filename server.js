@@ -13,6 +13,10 @@ app.get('/', function(req, res) {
   app.get('/thank-you', function(req, res) {
     res.sendFile(path.join(__dirname, '/thank-you.html'));
   });
+
+app.get('/login', function(req, res) {
+    res.sendFile(path.join(__dirname, '/login.html'));
+});
   
   
 
