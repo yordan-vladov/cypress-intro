@@ -14,6 +14,10 @@ app.get('/', function(req, res) {
     res.sendFile(path.join(__dirname, '/thank-you.html'));
   });
   
+  app.get('/indeex2', function(req, res) {
+    res.sendFile(path.join(__dirname, '/indeex2.html'));
+  });
+  
   
 
 app.listen(port);
