@@ -9,10 +9,8 @@ describe('Registration tests', () => {
 
   it('enter submit without valid user name',() => {
     cy.get('[data-test-id="submit"]').click();
-
     cy.get('[data-test-id="fullname-error"]').should('be.visible');
   })
-
 
   it('full name error is cleared after valid input is added',() => {
     cy.get('[data-test-id="submit"]').click();
@@ -27,10 +25,28 @@ describe('Registration tests', () => {
     cy.get('[data-test-id="email-error"]').should('be.visible');
   })
 
+  it('enter invalid password', () => {
+    cy.get('[data-test-id="password"]').type("1234");
+    cy.get('[data-test-id="submit"]').click();
+    cy.get('[data-test-id="password-error"]').should('be.visible');
+  })
+
+  it('enter invalid birthdate', () => {
+    cy.get('[data-test-id="date"]').type("2000-01-01");
+    cy.get('[data-test-id="submit"]').click();
+    cy.get('[data-test-id="date-error"]').should('not.exist');
+  })
+
+  it('enter invalid gender', () => {
+    cy.get('[data-test-id="gender"]').type("woman");
+    cy.get('[data-test-id="submit"]').click();
+    cy.get('[data-test-id="gender-error"]').should('be.visible');
+  })
+  
   it('enter valid data and click submit',()=> {
     cy.get('[data-test-id="fullname"').type("John Doe");
     cy.get('[data-test-id="email"').type("john_does@email.com");
-    cy.get('[data-test-id="password"').type("12345678");
+    cy.get('[data-test-id="password"').type("$Tr0ngP@ssw0rd!");
     cy.get('[data-test-id="gender"').select("Male");
     cy.get('[data-test-id="date"').type("2000-01-01");
     cy.get('[data-test-id="submit"]').click();
