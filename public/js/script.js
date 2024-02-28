@@ -32,6 +32,9 @@ const handleFormData = (e) => {
 
     // Regular expression pattern for email validation
     const emailPattern = /^[^ ]+@[^ ]+\.[a-z]{2,3}$/;
+    const passwordPattern = /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+    const datePattern = /^\d{4}-\d{2}-\d{2}$/;
+    const genderPattern = /^(male|female|other)$/i;
 
     // Clearing previous error messages
     document.querySelectorAll(".form-group .error").forEach(field => field.classList.remove("error"));
@@ -41,17 +44,26 @@ const handleFormData = (e) => {
     if (fullname === "") {
         showError(fullnameInput, "Enter your full name");
     }
-    if (!emailPattern.test(email)) {
+    if (!(emailPattern.test(email))) {
         showError(emailInput, "Enter a valid email address");
     }
     if (password === "") {
         showError(passwordInput, "Enter your password");
     }
+    if(!(passwordPattern.test(password))){
+        showError(passwordInput, "Your password is invalid");
+    }
     if (date === "") {
         showError(dateInput, "Select your date of birth");
     }
+    if (!(datePattern.test(date))) {
+        showError(dateInput, "Birthdate input is invalid");
+    }
     if (gender === "") {
         showError(genderInput, "Select your gender");
+    }
+    if(!(genderPattern.test(gender))){
+        showError(genderInput, "Gender is invalid");
     }
 
     // Checking for any remaining errors before form submission
