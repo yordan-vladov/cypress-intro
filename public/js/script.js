@@ -13,6 +13,24 @@ const showError = (field, errorText) => {
     field.closest(".form-group").appendChild(errorElement);
 }
 
+// Function to display error messages for password
+const showPasswordError = (errorText) => {
+    const passwordGroup = document.querySelector(".form-group.password");
+    showError(passwordGroup, errorText);
+}
+
+// Function to display error messages for date
+const showDateError = (errorText) => {
+    const dateGroup = document.querySelector(".form-group.date");
+    showError(dateGroup, errorText);
+}
+
+// Function to display error messages for gender
+const showGenderError = (errorText) => {
+    const genderGroup = document.querySelector(".form-group.gender");
+    showError(genderGroup, errorText);
+}
+
 // Function to handle form submission
 const handleFormData = (e) => {
     e.preventDefault();
