@@ -7,19 +7,78 @@ describe('Registration tests', () => {
     cy.visit('http://localhost:8080/register')
   })
 
-  it('enter submit without valid user name',() => {
+  it('enter submit without valid fullname',() => {
     cy.get('[data-test-id="submit"]').click();
 
     cy.get('[data-test-id="fullname-error"]').should('be.visible');
   })
 
+  it('enter submit without valid email',() => {
+    cy.get('[data-test-id="submit"]').click();
 
-  it('full name error is cleared after valid input is added',() => {
+    cy.get('[data-test-id="email-error"]').should('be.visible');
+  })
+  
+
+  it('enter submit without valid password',() => {
+    cy.get('[data-test-id="submit"]').click();
+
+    cy.get('[data-test-id="password-error"]').should('be.visible');
+  })
+  
+
+  it('enter submit without valid gender',() => {
+    cy.get('[data-test-id="submit"]').click();
+
+    cy.get('[data-test-id="gender-error"]').should('be.visible');
+  })
+
+  it('enter submit without valid date',() => {
+    cy.get('[data-test-id="submit"]').click();
+
+    cy.get('[data-test-id="date-error"]').should('be.visible');
+  })
+  
+  
+  
+
+
+  it('Full name error is cleared after valid input is added',() => {
     cy.get('[data-test-id="submit"]').click();
     cy.get('[data-test-id="fullname"').type("John Doe");
     cy.get('[data-test-id="submit"]').click();
     cy.get('[data-test-id="fullname-error"]').should('not.exist');
   })
+
+  it('Password error is cleared after valid input is added',() => {
+    cy.get('[data-test-id="submit"]').click();
+    cy.get('[data-test-id="password"').type("12345678");
+    cy.get('[data-test-id="submit"]').click();
+    cy.get('[data-test-id="password-error"]').should('not.exist');
+  })
+
+  it('Email error is cleared after valid input is added',() => {
+    cy.get('[data-test-id="submit"]').click();
+    cy.get('[data-test-id="email"').type("johndoe@gmail.com");
+    cy.get('[data-test-id="submit"]').click();
+    cy.get('[data-test-id="email-error"]').should('not.exist');
+  })
+
+  it('Gender error is cleared after valid input is added',() => {
+    cy.get('[data-test-id="submit"]').click();
+    cy.get('[data-test-id="gender"').select("Male")
+    cy.get('[data-test-id="submit"]').click();
+    cy.get('[data-test-id="gender-error"]').should('not.exist');
+  })
+
+  it('Date error is cleared after valid input is added',() => {
+    cy.get('[data-test-id="submit"]').click();
+    cy.get('[data-test-id="date"').type("2005-01-27")
+    cy.get('[data-test-id="submit"]').click();
+    cy.get('[data-test-id="date-error"]').should('not.exist');
+  })
+
+
 
   it('enter invalid email',() => {
     cy.get('[data-test-id="email"').type("invalid_email");
